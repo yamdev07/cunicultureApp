@@ -1,20 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MaleController;
+use App\Http\Controllers\FemelleController;
+use App\Http\Controllers\SaillieController;
+use App\Http\Controllers\MiseBasController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route pour le tableau de bord (page d'accueil)
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/', function () {
-    return view('dashboard', [
-        'nbMales' => DB::table('males')->count(),
-        'nbFemelles' => DB::table('femelles')->count(),
-        'nbSaillies' => DB::table('saillies')->count(),
-        'nbMisesBas' => DB::table('mises_bas')->count(),
-    ]);
-});
+// Routes CRUD pour les mâles et femelles
+Route::resource('males', MaleController::class);
+Route::resource('femelles', FemelleController::class);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+// Routes CRUD pour les saillies et mises bas (si existantes)
+Route::resource('saillies', SaillieController::class);
+Route::resource('mises-bas', MiseBasController::class);
+// Formulaire unique de création
+Route::get('/lapin/create', [App\Http\Controllers\LapinController::class, 'create'])->name('lapin.create');
+Route::post('/lapin/store', [App\Http\Controllers\LapinController::class, 'store'])->name('lapin.store');
+// Route pour changer l'état
+Route::patch('femelles/{femelle}/etat', [FemelleController::class, 'toggleEtat'])
+     ->name('femelles.toggleEtat');// web.php
+Route::patch('males/{male}/toggle-etat', [MaleController::class, 'toggleEtat'])->name('males.toggleEtat');
