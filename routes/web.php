@@ -17,4 +17,4 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);

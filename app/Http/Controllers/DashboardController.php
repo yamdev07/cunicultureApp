@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Male;
 use Illuminate\Http\Request;
+use App\Models\Male;
+use App\Models\Femelle;
+use App\Models\Saillie;
+use App\Models\MiseBas;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $totalMales = Male::count(); // nombre total
-        $males = Male::all(); // liste complète
+        $nbMales = Male::count();
+        $nbFemelles = Femelle::count();
+        $nbSaillies = Saillie::count();
+        $nbMisesBas = MiseBas::count();
 
-        return view('dashboard', compact('totalMales', 'males'));
+        return view('dashboard', compact(
+            'nbMales',
+            'nbFemelles',
+            'nbSaillies',
+            'nbMisesBas'
+        ));
     }
 }
