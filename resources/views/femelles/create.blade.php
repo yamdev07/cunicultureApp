@@ -48,7 +48,11 @@
                 <option value="Vide">Vide</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="{{ route('femelles.index') }}" class="btn btn-secondary">Annuler</a>
+        </div>
     </form>
 </div>
 @endsection

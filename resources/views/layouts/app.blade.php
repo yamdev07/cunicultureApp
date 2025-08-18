@@ -515,7 +515,7 @@
                 
                 <div class="copyright">
                     &copy; {{ date('Y') }} Cuniculture Pro - Tous droits réservés. 
-                    Développé avec ❤️ pour les éleveurs professionnels.
+                    Développé par yamdev07 pour les éleveurs professionnels.
                 </div>
             </div>
         </div>

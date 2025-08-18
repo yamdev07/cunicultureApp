@@ -6,21 +6,33 @@ use App\Http\Controllers\MaleController;
 use App\Http\Controllers\FemelleController;
 use App\Http\Controllers\SaillieController;
 use App\Http\Controllers\MiseBasController;
+use App\Http\Controllers\LapinController;
 
-// Route pour le tableau de bord (page d'accueil)
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// Tableau de bord
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-// Routes CRUD pour les mâles et femelles
+// CRUD Mâles
 Route::resource('males', MaleController::class);
-Route::resource('femelles', FemelleController::class);
-
-// Routes CRUD pour les saillies et mises bas (si existantes)
-Route::resource('saillies', SaillieController::class);
-Route::resource('mises-bas', MiseBasController::class);
-// Formulaire unique de création
-Route::get('/lapin/create', [App\Http\Controllers\LapinController::class, 'create'])->name('lapin.create');
-Route::post('/lapin/store', [App\Http\Controllers\LapinController::class, 'store'])->name('lapin.store');
-// Route pour changer l'état
-Route::patch('femelles/{femelle}/etat', [FemelleController::class, 'toggleEtat'])
-     ->name('femelles.toggleEtat');// web.php
 Route::patch('males/{male}/toggle-etat', [MaleController::class, 'toggleEtat'])->name('males.toggleEtat');
+
+// CRUD Femelles
+Route::resource('femelles', FemelleController::class);
+Route::patch('femelles/{femelle}/etat', [FemelleController::class, 'toggleEtat'])->name('femelles.toggleEtat');
+
+// CRUD Saillies
+Route::resource('saillies', SaillieController::class)->parameters([
+    'saillies' => 'saillie'
+]);
+
+// CRUD Mises Bas
+Route::resource('mises-bas', MiseBasController::class);
+
+// Lapin – création et stockage
+Route::get('/lapin/create', [LapinController::class, 'create'])->name('lapin.create');
+Route::post('/lapin/store', [LapinController::class, 'store'])->name('lapin.store');
