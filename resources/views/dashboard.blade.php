@@ -54,6 +54,25 @@
     <div class="dashboard-content">
         <!-- Left Column -->
         <div class="dashboard-column">
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Actions Rapides</h3>
+                <div class="actions-grid">
+                    @foreach([
+                        ['url' => '/males', 'icon' => 'bi-gender-male', 'title' => 'Gérer les mâles'],
+                        ['url' => '/femelles', 'icon' => 'bi-gender-female', 'title' => 'Gérer les femelles'],
+                        ['url' => '/saillies', 'icon' => 'bi-heart-pulse', 'title' => 'Enregistrer saillie'],
+                        ['url' => '/mises-bas', 'icon' => 'bi-motherboard', 'title' => 'Enregistrer mise bas']
+                    ] as $action)
+                    <a href="{{ url($action['url']) }}" class="action-card">
+                        <div class="action-icon">
+                            <i class="bi {{ $action['icon'] }}"></i>
+                        </div>
+                        <div class="action-title">{{ $action['title'] }}</div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
             <!-- Stats Cards -->
             <div class="stats-grid">
                 @foreach([
@@ -78,25 +97,6 @@
                 @endforeach
             </div>
 
-            <!-- Quick Actions -->
-            <div class="quick-actions">
-                <h3>Actions Rapides</h3>
-                <div class="actions-grid">
-                    @foreach([
-                        ['url' => '/males', 'icon' => 'bi-gender-male', 'title' => 'Gérer les mâles'],
-                        ['url' => '/femelles', 'icon' => 'bi-gender-female', 'title' => 'Gérer les femelles'],
-                        ['url' => '/saillies', 'icon' => 'bi-heart-pulse', 'title' => 'Enregistrer saillie'],
-                        ['url' => '/mises-bas', 'icon' => 'bi-motherboard', 'title' => 'Enregistrer mise bas']
-                    ] as $action)
-                    <a href="{{ url($action['url']) }}" class="action-card">
-                        <div class="action-icon">
-                            <i class="bi {{ $action['icon'] }}"></i>
-                        </div>
-                        <div class="action-title">{{ $action['title'] }}</div>
-                    </a>
-                    @endforeach
-                </div>
-            </div>
         </div>
 
         <!-- Right Column -->

@@ -30,9 +30,11 @@ Route::resource('saillies', SaillieController::class)->parameters([
     'saillies' => 'saillie'
 ]);
 
-// CRUD Mises Bas
-Route::resource('mises-bas', MiseBasController::class);
 
+// CRUD Mises Bas 
+Route::resource('mises-bas', MiseBasController::class)
+    ->parameters(['mises-bas' => 'mises_ba']);
+    
 // Lapin – création et stockage
 Route::get('/lapin/create', [LapinController::class, 'create'])->name('lapin.create');
-Route::post('/lapin/store', [LapinController::class, 'store'])->name('lapin.store');
+Route::post('/lapins', [LapinController::class, 'store'])->name('lapins.store');
